@@ -65,10 +65,10 @@ public class CameraController : MonoBehaviour
         smoothRotation.x = Mathf.Lerp(smoothRotation.x, targetRotation.x, smoothness);
         smoothRotation.y = Mathf.Lerp(smoothRotation.y, targetRotation.y, smoothness);
 
-        //transform.rotation = Quaternion.Euler(smoothRotation.x, smoothRotation.y, 0);
         player.transform.localRotation = Quaternion.Euler(0, smoothRotation.y, 0);
         Head.transform.localRotation = Quaternion.Euler(smoothRotation.x, 0, 0);
 
+        //Bob Camera
         CheckMotion();
         ResetPosition();
     }

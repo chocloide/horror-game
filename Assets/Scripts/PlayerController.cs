@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour{
         Rigid = GetComponent<Rigidbody>();
     }
 
-    
     void Update(){
         input = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
