@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour{
     public Rigidbody Rigid;
     public CameraController Camera;
 
+
     void Start(){
         energy = maxEnergy;
         Rigid = GetComponent<Rigidbody>();

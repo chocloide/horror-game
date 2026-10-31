@@ -6,15 +6,22 @@ using UnityEngine;
 
 public class Tablet : MonoBehaviour
 {
-    [SerializeField] TaskManager taskManager;
+    private TaskManager taskManager;
     [SerializeField] Canvas UI;
 
     public CheckArea CheckArea = null;
+    public TaskObject obj = null;
 
+    private void Start(){
+        taskManager = FindObjectOfType<TaskManager>();
+        //Test de tareas
+        taskManager.NewTaskObject("Toca la esfera", obj, 2);
+        taskManager.NewTaskPlace("Anda al cubo", CheckArea);
+    }
 
     void Update(){
         if (Input.GetKeyDown(KeyCode.Tab)){
-            UI.enabled = !UI.enabled;
+            //UI.enabled = !UI.enabled;
         }
     }
 }

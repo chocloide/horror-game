@@ -10,10 +10,19 @@ public class Task{
     public TaskType type;
 
     public CheckArea place;
+    public TaskObject obj;
+
+    public GameObject TextMeshObj;
+    public TextMeshProUGUI TextComponent;
+
     public int amount = 0;
     public int maxAmount = 0;
 
     public bool isCompleted = false;
+
+    public void UpdateText(){
+        TextComponent.text = name + " : " + amount.ToString() + "/" + maxAmount.ToString();
+    }
 
 }
 
@@ -21,45 +30,83 @@ public class TaskManager : MonoBehaviour{
     [SerializeField] GameObject TaskList;
     private List<Task> list = new List<Task>();
 
-    public void AddTask(string taskName, Task.TaskType type, CheckArea placeTrigger = null){
+    public void NewTaskPlace(string taskName, CheckArea placeTrigger = null){
         Task task = new Task();
+       task.TextMeshObj = CreateTextMesh(taskName);
+
+        task.name = taskName;
+        task.type = Task.TaskType.Place;
+        task.place = placeTrigger;
+
+        list.Add(task);
+    }
+
+    public void NewTaskObject(string taskName, TaskObject Object = null, int Needed = 1){
+        Task task = new Task();
+        
+        task.name = taskName;
+        task.type = Task.TaskType.Object;
+        task.obj = Object;
+        
+        task.maxAmount = Needed;
+        string a = task.name;
+        
+        if (Needed > 1){
+            a += " : " + task.amount.ToString() + "/" + task.maxAmount.ToString();
+        }
+
+        task.TextMeshObj = CreateTextMesh(a);
+        task.TextComponent = task.TextMeshObj.GetComponent<TextMeshProUGUI>();
+
+        list.Add(task);
+    }
+
+    GameObject CreateTextMesh(string text){
         GameObject obj = new GameObject("Task");
 
-        obj.name = taskName;
+        obj.name = text;
         obj.transform.SetParent(TaskList.transform, false);
         obj.AddComponent<TextMeshProUGUI>();
         obj.layer = 8;
 
         TextMeshProUGUI textMesh = obj.GetComponent<TextMeshProUGUI>();
-        RectTransform rect = obj.GetComponent<RectTransform>();
 
-        rect.anchoredPosition = new Vector3(-175, 100 - (32 * list.Count), 0);
-
-        task.name = taskName;
-        task.type = type;
-
-        if (type == Task.TaskType.Place){
-            task.place = placeTrigger;
-        }
-
-        textMesh.text = taskName;
+        textMesh.text = text;
         textMesh.color = new Color(0, 255, 0);
         textMesh.enableWordWrapping = false;
-
         textMesh.fontSize = 32;
-        list.Add(task);
+
+        return obj;
     }
 
-    public void checkPlace(CheckArea checkPlace){
+    public void checkPlace(CheckArea check){
         foreach (Task t in list){
-            if (t.type == Task.TaskType.Place && t.place == checkPlace){
-                GameObject taskText = GameObject.Find(t.name);
+            if (t.type == Task.TaskType.Place && t.place == check){
                 t.isCompleted = true;
-                Destroy(taskText);
+                Destroy(t.TextMeshObj);
                 list.Remove(t);
-                Debug.Log(t.name + " terminada");
                 break;
             }
         }
     }
+
+    public void updateObject(TaskObject taskObj){
+        foreach (Task t in list){
+            if (t.type == Task.TaskType.Object && t.obj == taskObj){
+                if (t.amount != t.maxAmount){
+                    t.amount++;
+                    t.UpdateText();
+
+                    if (t.amount == t.maxAmount) {
+                        t.isCompleted = true;
+                        Destroy(t.TextMeshObj);
+                        list.Remove(t);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+
 }
