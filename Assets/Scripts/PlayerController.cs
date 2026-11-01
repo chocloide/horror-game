@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour{
@@ -12,7 +13,8 @@ public class PlayerController : MonoBehaviour{
     bool can_run = true;
 
     public Rigidbody Rigid;
-    public CameraController Camera;
+    [SerializeField] CameraController Camera;
+    [SerializeField] MonsterIA Monster;
 
 
     void Start(){
@@ -23,6 +25,7 @@ public class PlayerController : MonoBehaviour{
     void Update(){
         input = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
+
 
     void FixedUpdate(){
         Direction = transform.forward * input.y + transform.right * input.x;
@@ -35,16 +38,24 @@ public class PlayerController : MonoBehaviour{
             can_run = false;
         }
 
-        if (Input.GetButton("Run") && can_run && input != Vector2.zero){
-            energy = Mathf.Max(energy - Time.deltaTime, 0);
-            Camera.ChangeFrequency(20f);
-            Rigid.AddForce(new Vector3(Direction.x * runSpeed, 0, Direction.z * runSpeed), ForceMode.VelocityChange);
+        if (input != Vector2.zero){
+            if (Input.GetButton("Run") && can_run){
+                Monster.AddSus(0.2f);
+                energy = Mathf.Max(energy - Time.deltaTime, 0);
+                Camera.ChangeFrequency(20f);
+                Rigid.AddForce(new Vector3(Direction.x * runSpeed, 0, Direction.z * runSpeed), ForceMode.VelocityChange);
+            }
+
+            else{
+                Monster.AddSus(0.1f);
+                energy = Mathf.Min(energy + Time.deltaTime, maxEnergy);
+                Camera.ChangeFrequency(10f);
+                Rigid.AddForce(new Vector3(Direction.x * walkSpeed, 0, Direction.z * walkSpeed), ForceMode.VelocityChange);
+            }
         }
 
         else{
             energy = Mathf.Min(energy + Time.deltaTime, maxEnergy);
-            Camera.ChangeFrequency(10f);
-            Rigid.AddForce(new Vector3(Direction.x * walkSpeed, 0, Direction.z * walkSpeed), ForceMode.VelocityChange);
         }
     }
 }

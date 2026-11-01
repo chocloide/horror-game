@@ -27,8 +27,19 @@ public class Task{
 }
 
 public class TaskManager : MonoBehaviour{
+
+    public static TaskManager instance {  get; private set; }
+
     [SerializeField] GameObject TaskList;
     private List<Task> list = new List<Task>();
+
+    private void Awake(){
+        instance = this;
+    }
+
+    private void Start(){
+        TaskObject.OnInteract += updateObject;
+    }
 
     public void NewTaskPlace(string taskName, CheckArea placeTrigger = null){
         Task task = new Task();
@@ -47,7 +58,7 @@ public class TaskManager : MonoBehaviour{
         task.name = taskName;
         task.type = Task.TaskType.Object;
         task.obj = Object;
-        
+  
         task.maxAmount = Needed;
         string a = task.name;
         

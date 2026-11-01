@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using System;
 
-public class TaskObject : MonoBehaviour, IInteractable{
+public class TaskObject : MonoBehaviour{
 
     public string Name;
     public KeyCode input;
-    [SerializeField] TextMeshProUGUI text;
-    public UnityEvent<TaskObject> onInteract;
+
+    public TextMeshProUGUI text;
+
+    public static event Action<TaskObject> OnInteract; 
+    // Los Action son como "señales" que permiten que otros scripts
+    // ejecuten metodos sin que dependan directamente entre sí 
 
     public void Interact(){
-        onInteract.Invoke(this);
+        OnInteract(this);
     }
 
     public void OnHover(){
