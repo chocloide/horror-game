@@ -105,7 +105,7 @@ public class MonsterIA : MonoBehaviour
         agent.SetDestination(Player.transform.position);
         sus = Mathf.Max(sus - 5 * Time.deltaTime, 0);
 
-        if (sus <= 0){
+        if (sus <= 0 & !canSeePlayer){
             CurrentPosition = GetClosePoint().position;
             agent.speed = patrolSpeed;
             currentState = States.Patrol;

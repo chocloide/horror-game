@@ -11,7 +11,7 @@ public class EnergyBar : MonoBehaviour
 
     void Update(){
         Energybar.fillAmount = player.energy / player.maxEnergy;
-        SusBar.fillAmount = Monster.sus / 50;
+        //SusBar.fillAmount = Monster.sus / 50;
 
 
         if (player.energy == 0){

@@ -40,14 +40,14 @@ public class PlayerController : MonoBehaviour{
 
         if (input != Vector2.zero){
             if (Input.GetButton("Run") && can_run){
-                Monster.AddSus(0.2f);
+                //Monster.AddSus(0.2f);
                 energy = Mathf.Max(energy - Time.deltaTime, 0);
                 Camera.ChangeFrequency(20f);
                 Rigid.AddForce(new Vector3(Direction.x * runSpeed, 0, Direction.z * runSpeed), ForceMode.VelocityChange);
             }
 
             else{
-                Monster.AddSus(0.1f);
+                //Monster.AddSus(0.1f);
                 energy = Mathf.Min(energy + Time.deltaTime, maxEnergy);
                 Camera.ChangeFrequency(10f);
                 Rigid.AddForce(new Vector3(Direction.x * walkSpeed, 0, Direction.z * walkSpeed), ForceMode.VelocityChange);

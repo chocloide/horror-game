@@ -151,6 +151,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1787036815288685259}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 30a4127d5933dfe49b44f556b0d9e307,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9182845722841432770}
   m_SourcePrefab: {fileID: 100100000, guid: 30a4127d5933dfe49b44f556b0d9e307, type: 3}
 --- !u!1 &7378675183455404181 stripped
 GameObject:
@@ -170,7 +174,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62f08f8c9fa8944496a0c0a8053462e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScreenCamera: {fileID: 0}
-  Screen: {fileID: 0}
-  UI: {fileID: 0}
-  TaskList: {fileID: 0}
+  Apps: []
+  ScreenOff: {fileID: 2100000, guid: 8d2e1a4330d824a4aba53591f7c0a422, type: 2}
+  ScreenOn: {fileID: 2100000, guid: 7590d94a2c02f254fa09ddc07e9ab78c, type: 2}
+  Screen: {fileID: 7479187512899372177}
+  obj: {fileID: 0}
+  SceenCamera: {fileID: 0}
+--- !u!111 &9182845722841432770
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7378675183455404181}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: e5745b96a6d7c8948b45777735184715, type: 2}
+  - {fileID: 7400000, guid: 774141c024f144843ae241e462baac39, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!1 &7479187512899372177 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8256134651489076907, guid: 30a4127d5933dfe49b44f556b0d9e307,
+    type: 3}
+  m_PrefabInstance: {fileID: 7685173057787575748}
+  m_PrefabAsset: {fileID: 0}
