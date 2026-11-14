@@ -14,13 +14,13 @@ public class Trituradora : MonoBehaviour
     private InteractableObject interactableComponent;
     private Animation Anim;
 
-    // Start is called before the first frame update
+    List<Item> listOfScrap;
+
     void Start(){
         Anim = GetComponent<Animation>();
         interactableComponent = gameObject.GetComponent<InteractableObject>();
         InteractableObject.OnInteract += UpdateProgress;
     }
-
 
     void UpdateProgress(InteractableObject obj){
         if (obj != interactableComponent) return;
@@ -28,7 +28,8 @@ public class Trituradora : MonoBehaviour
         
         foreach (KeyValuePair<string, Item> item in Inventory.instance.inventory){
             keysToRemove.Add(item.Key);
-            Anim.Play("TrituradoraCrush");
+            //listOfScrap.Add(item.Value);
+            //Anim.Play("TrituradoraCrush");
         }
 
         foreach (var key in keysToRemove){

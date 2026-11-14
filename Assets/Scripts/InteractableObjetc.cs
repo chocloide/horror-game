@@ -16,7 +16,9 @@ public class InteractableObject : MonoBehaviour{
 
     private TextMeshProUGUI NameLabel;
     private TextMeshProUGUI DescriptionLabel;
+    private Material outline;
 
+    public bool canOutline = true;
 
     public enum InteractableType {Default, Object}
 
@@ -33,6 +35,10 @@ public class InteractableObject : MonoBehaviour{
 
 
     private void Start(){
+        if (canOutline){
+            outline = GetComponent<Renderer>().materials[1];
+        }
+        
         NameLabel = GameObject.Find("TextName").GetComponent<TextMeshProUGUI>();
         DescriptionLabel = GameObject.Find("TextDescription").GetComponent<TextMeshProUGUI>();
     }
@@ -44,10 +50,17 @@ public class InteractableObject : MonoBehaviour{
     }
 
     public void OnHover(){
+        if (canOutline){
+            outline.SetFloat("_Active", 1);
+        }
         NameLabel.text = objName;
         DescriptionLabel.text = description;
     }
+
     public void OnHoverExit(){
+        if (canOutline){
+            outline.SetFloat("_Active", 0);
+        }
         NameLabel.text = " ";
         DescriptionLabel.text = " ";
     }

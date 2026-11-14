@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9822b30d03a49944dabdcfda02ac3d9a, type: 3}
+  m_Name: Resorte
+  m_EditorClassIdentifier: 
+  id: 1
+  description: 
+  icon: {fileID: 21300000, guid: 6f869ae4a9d3d98459dec36a9b22b0ce, type: 3}
+  prefab: {fileID: 5697333455832620604, guid: f9e47e115c08ad44ab6546a5d4f8a4e3, type: 3}

@@ -16,12 +16,13 @@ public class InventoryUI : MonoBehaviour
     
     public void AddUIItem(string inventoryId, Item item){
         var itemUI = Instantiate(uiItemPrefab).GetComponent<ItemUI>();
+
         itemUI.transform.SetParent(uiInventoryParent);
         itemUI.transform.localPosition = Vector3.zero;
         itemUI.transform.localRotation = Quaternion.identity;
+
         inventoryUI.Add(inventoryId, itemUI.gameObject);
         itemUI.Initialize(inventoryId,item, inventory.DropItem);
-
     }
 
     public void RemoveUIItem(string inventoryId){
@@ -30,5 +31,4 @@ public class InventoryUI : MonoBehaviour
         Destroy(itemUI);
 
     }
-
 }

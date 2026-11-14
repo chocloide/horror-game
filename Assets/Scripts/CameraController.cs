@@ -19,8 +19,9 @@ public class CameraController : MonoBehaviour
     private Vector3 start_pos;
     
 
-
     void Start(){
+        PauseMenu.OnPause += OnGamePaused;
+        PauseMenu.OnMainMenu += OnMainMenu;
         Cursor.lockState = CursorLockMode.Locked;
     }
     private void Awake(){
@@ -43,6 +44,13 @@ public class CameraController : MonoBehaviour
         frequency = newfrequency;
     }
 
+    public void OnMainMenu(){
+        PauseMenu.OnPause -= OnGamePaused;
+    }
+    public void OnGamePaused(bool pause){
+        this.enabled = !pause;
+    }
+
     private Vector3 footStepMotion(){
         Vector3 pos = Vector3.zero;
         pos.y += Mathf.Sin(Time.time * frequency) * amplitude.y;
@@ -55,6 +63,7 @@ public class CameraController : MonoBehaviour
     }
 
     void LateUpdate(){
+
         float mouseX = Input.GetAxisRaw("Mouse Y") * Sensitivity;
         float mouseY = Input.GetAxisRaw("Mouse X") * Sensitivity;
 

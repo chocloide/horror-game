@@ -50,7 +50,7 @@ public class Inventory : MonoBehaviour{
     }
 
     public void DropItem(string inventoryId){
-        var droppedItem = Instantiate(droppedItemPrefab, transform.position, Quaternion.identity).GetComponent<InteractableObject>();
+        //var droppedItem = Instantiate(droppedItemPrefab, transform.position, Quaternion.identity).GetComponent<InteractableObject>();
         var item = inventory.GetValueOrDefault(inventoryId);
         inventory.Remove(inventoryId);
         ui.RemoveUIItem(inventoryId);

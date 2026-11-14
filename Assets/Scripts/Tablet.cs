@@ -40,11 +40,11 @@ public class Tablet : MonoBehaviour
             seeing = !seeing;
 
             if (seeing){
-                Anim.Play("Seeing");
+                Anim.Play("TabletSeeing");
             }
             else
             {
-                Anim.Play("Normal");
+                Anim.Play("TabletNormal");
             }
 
         }

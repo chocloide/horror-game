@@ -20,12 +20,22 @@ public class PlayerController : MonoBehaviour{
     void Start(){
         energy = maxEnergy;
         Rigid = GetComponent<Rigidbody>();
+        PauseMenu.OnPause += OnGamePaused;
+        PauseMenu.OnMainMenu += OnMainMenu;
     }
 
     void Update(){
         input = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
 
+
+    public void OnMainMenu(){
+        PauseMenu.OnPause -= OnGamePaused;
+    }
+    public void OnGamePaused(bool pause){
+        this.enabled = !pause;
+        Rigid.freezeRotation = !pause;
+    }
 
     void FixedUpdate(){
         Direction = transform.forward * input.y + transform.right * input.x;

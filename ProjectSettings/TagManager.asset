@@ -7,6 +7,8 @@ TagManager:
   - PatrolPoint
   - DroppedItem
   - InteractableItem
+  - RoomSpawnPoint
+  - Rooms
   layers:
   - Default
   - TransparentFX

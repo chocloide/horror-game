@@ -27,11 +27,11 @@ public class InteractableController : MonoBehaviour{
                 }
 
             }
-            else
-            {
-                Clear();
-            }
         }
+        else{
+            Clear();
+        }
+        
     }
 
 
