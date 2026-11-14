@@ -12,10 +12,13 @@ public class RoomSpawPoint : MonoBehaviour{
     private GenerationManager templates;
     private int rand;
     private bool spawned =false;
-
+    public GameObject CloseRoom;
+    private GameObject RoomParent;
     void Start(){
         templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<GenerationManager>();
-        Invoke("SpawnRooms", 0.1f);
+        RoomParent = GameObject.Find("ROOMPARENT");
+
+        Invoke("SpawnRooms", 0.5f);
     }
 
     void SpawnRooms(){
@@ -23,24 +26,25 @@ public class RoomSpawPoint : MonoBehaviour{
             if (openingDirection == 1)
             {//BOTTOM
                 rand = Random.Range(0, templates.bottomRooms.Length);
-                Instantiate(templates.bottomRooms[rand], transform.position, Quaternion.identity);
+                Instantiate(templates.bottomRooms[rand], transform.position, Quaternion.identity, GameObject.Find("ROOMPARENT").transform);
             }
 
             else if (openingDirection == 2)
             {//TOP
                 rand = Random.Range(0, templates.topRooms.Length);
-                Instantiate(templates.topRooms[rand], transform.position, Quaternion.identity);
+                Instantiate(templates.topRooms[rand], transform.position, Quaternion.identity, GameObject.Find("ROOMPARENT").transform);
             }
 
             else if (openingDirection == 3)
             {//LEFT
                 rand = Random.Range(0, templates.leftRooms.Length);
-                Instantiate(templates.leftRooms[rand], transform.position, Quaternion.identity);
+                Instantiate(templates.leftRooms[rand], transform.position, Quaternion.identity, GameObject.Find("ROOMPARENT").transform);
+                
             }
             else if (openingDirection == 4)
             {//RIGHT
                 rand = Random.Range(0, templates.rightRooms.Length);
-                Instantiate(templates.rightRooms[rand], transform.position, Quaternion.identity);
+                Instantiate(templates.rightRooms[rand], transform.position, Quaternion.identity, GameObject.Find("ROOMPARENT").transform);
             }
 
             spawned = true;
@@ -50,9 +54,13 @@ public class RoomSpawPoint : MonoBehaviour{
 
     private void OnTriggerEnter(Collider other){
         if (other.CompareTag("RoomSpawnPoint")){
-            if (other.GetComponent<RoomSpawPoint>().spawned == false && spawned == false){
-                Instantiate(templates.CloseRoom, transform.position, Quaternion.identity);
-                Destroy(gameObject);
+            var point = other.GetComponent<RoomSpawPoint>();
+
+
+            if (point && point.spawned == false && spawned == false){
+                Instantiate(CloseRoom, transform.position, Quaternion.identity);
+                //Destroy(gameObject);
+                Debug.Log("amor");
             }
             spawned = true;
         }

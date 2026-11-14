@@ -17,9 +17,12 @@ public class InteractableObject : MonoBehaviour{
     private TextMeshProUGUI NameLabel;
     private TextMeshProUGUI DescriptionLabel;
     private Material outline;
+    
+    public AudioManager audioManager;
 
     public bool canOutline = true;
-
+    public bool PlayAudio = true;
+    public int audioId = 0;
     public enum InteractableType {Default, Object}
 
     public InteractableType type = InteractableType.Default;
@@ -38,13 +41,15 @@ public class InteractableObject : MonoBehaviour{
         if (canOutline){
             outline = GetComponent<Renderer>().materials[1];
         }
-        
+
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         NameLabel = GameObject.Find("TextName").GetComponent<TextMeshProUGUI>();
         DescriptionLabel = GameObject.Find("TextDescription").GetComponent<TextMeshProUGUI>();
     }
 
     public void Interact(){
         if (can_interact){
+            if (PlayAudio) audioManager.PlayAudio(audioId);
             OnInteract.Invoke(this);
         }
     }

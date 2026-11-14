@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class EnergyBar : MonoBehaviour
 {
     [SerializeField] Image Energybar;
+    [SerializeField] Image HealthBar;
     [SerializeField] Image SusBar;
     [SerializeField] PlayerController player;
     [SerializeField] MonsterIA Monster;
@@ -11,15 +12,14 @@ public class EnergyBar : MonoBehaviour
 
     void Update(){
         Energybar.fillAmount = player.energy / player.maxEnergy;
-        //SusBar.fillAmount = Monster.sus / 50;
-
+        HealthBar.fillAmount = player.health / player.maxHealth;
 
         if (player.energy == 0){
             Energybar.color = new Color32(159, 159, 159, 125);
         }
 
         else if (player.energy == player.maxEnergy){
-            Energybar.color = new Color32(255,255, 255, 255);
+            Energybar.color = new Color32(254, 207, 0, 255);
         }
     }
 }

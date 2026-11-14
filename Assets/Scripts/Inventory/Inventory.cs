@@ -8,14 +8,11 @@ public class Inventory : MonoBehaviour{
 
     [Header("References")]
     [SerializeField] InventoryUI ui;
-    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioManager audioManager;
 
     [Header("Prefabs")]
     [SerializeField] GameObject droppedItemPrefab;
 
-    [Header("Audio")]
-    [SerializeField] AudioClip pickUpItem;
-    [SerializeField] AudioClip dropItem;
 
     public Dictionary<string, Item> inventory = new();
 
@@ -29,8 +26,6 @@ public class Inventory : MonoBehaviour{
     }
 
     public void OnInteract(InteractableObject other){
-        
-
         if (other.CompareTag("DroppedItem")){
             if (other.pickedUp){
                 return;
@@ -38,23 +33,20 @@ public class Inventory : MonoBehaviour{
             other.pickedUp = true;
             AddItem(other.item);
             Destroy(other.gameObject);
-            audioSource.PlayOneShot(pickUpItem);
         }
     }
 
     public void AddItem(Item item){
-        audioSource.PlayOneShot(pickUpItem);
+        audioManager.PlayAudio(2);
         item.id = Guid.NewGuid().ToString();
         inventory.Add(item.id, item);
         ui.AddUIItem(item.id, item);
     }
 
     public void DropItem(string inventoryId){
-        //var droppedItem = Instantiate(droppedItemPrefab, transform.position, Quaternion.identity).GetComponent<InteractableObject>();
         var item = inventory.GetValueOrDefault(inventoryId);
         inventory.Remove(inventoryId);
         ui.RemoveUIItem(inventoryId);
-        audioSource.PlayOneShot(dropItem);
     }
 
 

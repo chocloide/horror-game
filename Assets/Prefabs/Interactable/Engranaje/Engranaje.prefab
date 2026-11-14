@@ -141,7 +141,9 @@ MonoBehaviour:
   can_interact: 1
   objName: Engranaje
   description: 
+  audioManager: {fileID: 0}
   canOutline: 1
+  audioId: 1
   type: 0
   autoStart: 0
   enablePickUpDelay: 1

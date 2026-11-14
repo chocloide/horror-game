@@ -6,11 +6,9 @@ public class PauseMenu : MonoBehaviour{
     public bool paused = false;
 
     [SerializeField] Canvas PauseCanvas;
-    [SerializeField] Canvas OptionsCanvas;
 
     public static event Action<bool> OnPause;
     public static event Action OnMainMenu;
-    bool SeeingOptions = false;
 
     void Update(){
         if (Input.GetKeyDown(KeyCode.Escape)){
@@ -21,12 +19,6 @@ public class PauseMenu : MonoBehaviour{
         }
     }
 
-    public void OnOptionsPress(){
-        SeeingOptions = !SeeingOptions;
-
-        OptionsCanvas.enabled = SeeingOptions;
-        PauseCanvas.enabled = !SeeingOptions;
-    }
 
     void CheckPause(){
         if (paused){
@@ -37,7 +29,6 @@ public class PauseMenu : MonoBehaviour{
         else{
             Cursor.lockState = CursorLockMode.Locked;
             PauseCanvas.enabled = false;
-            OptionsCanvas.enabled = false;
         }
     }
 

@@ -10,13 +10,16 @@ public class PlayerController : MonoBehaviour{
 
     public float maxEnergy = 10;
     public float energy = 10;
+
+    public float maxHealth = 10;
+    public float health = 10;
     bool can_run = true;
 
     public Rigidbody Rigid;
     [SerializeField] CameraController Camera;
     [SerializeField] MonsterIA Monster;
-
-
+    [SerializeField] AudioClip FootStep;
+    [SerializeField] AudioSource audioSource;
     void Start(){
         energy = maxEnergy;
         Rigid = GetComponent<Rigidbody>();
@@ -49,14 +52,18 @@ public class PlayerController : MonoBehaviour{
         }
 
         if (input != Vector2.zero){
+            if (audioSource.isPlaying == false) audioSource.PlayOneShot(FootStep);
+
             if (Input.GetButton("Run") && can_run){
                 //Monster.AddSus(0.2f);
+                audioSource.pitch = 1.4f;
                 energy = Mathf.Max(energy - Time.deltaTime, 0);
                 Camera.ChangeFrequency(20f);
                 Rigid.AddForce(new Vector3(Direction.x * runSpeed, 0, Direction.z * runSpeed), ForceMode.VelocityChange);
             }
 
             else{
+                audioSource.pitch = 1f;
                 //Monster.AddSus(0.1f);
                 energy = Mathf.Min(energy + Time.deltaTime, maxEnergy);
                 Camera.ChangeFrequency(10f);
@@ -65,6 +72,7 @@ public class PlayerController : MonoBehaviour{
         }
 
         else{
+            audioSource.Stop();
             energy = Mathf.Min(energy + Time.deltaTime, maxEnergy);
         }
     }

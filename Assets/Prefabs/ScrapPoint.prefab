@@ -13,7 +13,7 @@ GameObject:
   m_Layer: 0
   m_Name: ScrapPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -44,4 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 134a80bf006dc4b4a8963ad8aee47c52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Scraps: []
+  Scraps:
+  - {fileID: 1206570498866176130, guid: 639bc118b8ef73d42ae4433172d34e66, type: 3}
+  - {fileID: 5384249296610892727, guid: 149e599d299872e45834f02b99cd3d6e, type: 3}
+  - {fileID: 5697333455832620604, guid: f9e47e115c08ad44ab6546a5d4f8a4e3, type: 3}
+  - {fileID: 5697825970453905668, guid: 2f109e4bc86afc14c99d0f43c0a8e66e, type: 3}

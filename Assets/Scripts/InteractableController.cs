@@ -15,17 +15,23 @@ public class InteractableController : MonoBehaviour{
         Ray r = new Ray(Camera.transform.position, Camera.transform.forward);
 
         if (Physics.Raycast(r, out RaycastHit hitInfo, Distance)){
-            if (hitInfo.collider.gameObject.TryGetComponent(out InteractableObject interactObj)){
-                if (current != interactObj){
+            if (hitInfo.collider.gameObject.TryGetComponent(out InteractableObject interactObj))
+            {
+                if (current != interactObj)
+                {
                     Clear();
                     current = interactObj;
                     current.OnHover();
                 }
 
-                if (Input.GetKeyDown(KeyCode.E)){
+                if (Input.GetKeyDown(KeyCode.E) && current){
                     current.Interact();
+                    Clear();
                 }
 
+            }
+            else{
+                Clear();
             }
         }
         else{

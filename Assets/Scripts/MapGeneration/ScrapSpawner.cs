@@ -13,9 +13,7 @@ public class ScrapSpawner : MonoBehaviour{
         generationManager = GameObject.FindGameObjectWithTag("Rooms").GetComponent<GenerationManager>();
         rand = Random.Range(0, Scraps.Length);
 
-        if (generationManager.totalScrap != generationManager.maxScrap){
-            Instantiate(Scraps[rand], transform.position, Quaternion.identity);
-        }
+        Instantiate(Scraps[rand], transform.position, Quaternion.identity);
         
     }
 

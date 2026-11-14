@@ -13,9 +13,8 @@ public class MonsterIA : MonoBehaviour
     List<GameObject> PointsList = new List<GameObject>();
 
     int index = 0;
-    [SerializeField] PlayerController Player;
-    [SerializeField] GameObject PatrolPoints;
-
+    private PlayerController Player;
+    
     Vector3 CurrentPosition = Vector3.zero;
     Vector3 SusPosition = Vector3.zero;
     float distanceLeft = 0f;
@@ -41,10 +40,14 @@ public class MonsterIA : MonoBehaviour
 
     void Start(){
         GetChildPoints();
+        Player = GameObject.Find("Player").GetComponent<PlayerController>();
         agent = GetComponent<NavMeshAgent>();
         CurrentPosition = PointsList[0].transform.position;
         StartCoroutine(FOVRoutine());
 
+
+        PauseMenu.OnPause += OnGamePaused;
+        PauseMenu.OnMainMenu += OnMainMenu;
     }
 
     void Update(){
@@ -64,6 +67,14 @@ public class MonsterIA : MonoBehaviour
                 break;
         }
     }
+    public void OnMainMenu(){
+        PauseMenu.OnPause -= OnGamePaused;
+    }
+
+    public void OnGamePaused(bool pause){
+        this.enabled = !pause;
+        agent.enabled = !pause;
+    }
 
     private void PatrolState(){
         distanceLeft = Vector3.Distance(CurrentPosition, transform.position);
@@ -77,7 +88,7 @@ public class MonsterIA : MonoBehaviour
             CurrentPosition = PointsList[index].transform.position;
         }
 
-        else if ((sus >= 25 & distancePlayer < 25) || canSeePlayer){
+        else if ((sus >= 25 & distancePlayer < 25) ){
             SusPosition = Player.transform.position;
             currentState = States.Sus;
             time = timeSearching;
@@ -113,24 +124,23 @@ public class MonsterIA : MonoBehaviour
     }
 
     private void GetChildPoints(){
-        foreach (Transform child in PatrolPoints.transform)
-        {
-            if (child.gameObject.tag == "PatrolPoint"){
-                PointsList.Add(child.gameObject);
-            }
+        GameObject[] transform = GameObject.FindGameObjectsWithTag("PatrolPoint");
+        
+        foreach (GameObject child in transform){
+            PointsList.Add(child.gameObject);
         }
     }
 
     private Transform GetClosePoint(){
         int i = 0;
-        foreach (Transform point in PatrolPoints.transform)
+        foreach (GameObject point in PointsList)
         {
             i++;
             float DistanceTo = Vector3.Distance(transform.position, point.transform.position);
 
             if (DistanceTo < 20 & DistanceTo > 0){
                 index = i;
-                return point; 
+                return point.transform; 
 
             }
 

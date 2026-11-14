@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 public class GenerationManager : MonoBehaviour{
@@ -13,5 +14,22 @@ public class GenerationManager : MonoBehaviour{
 
     public int maxScrap;
     public int totalScrap = 0;
+
+    public NavMeshSurface navMesh;
+    public GameObject Enemy;
+
+    private void Start(){
+        Invoke("BakeMesh", 1f);
+        Invoke("GenerateEnemy", 1.2f);
+    }
+
+    void BakeMesh(){
+        navMesh.BuildNavMesh();
+    }
+
+    void GenerateEnemy(){
+        Instantiate(Enemy);
+
+    }
 
 }
