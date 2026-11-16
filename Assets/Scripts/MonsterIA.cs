@@ -11,6 +11,7 @@ public class MonsterIA : MonoBehaviour
 
     NavMeshAgent agent;
     List<GameObject> PointsList = new List<GameObject>();
+    [SerializeField] AudioSource Sceamer;
 
     int index = 0;
     private PlayerController Player;
@@ -45,7 +46,7 @@ public class MonsterIA : MonoBehaviour
         CurrentPosition = PointsList[0].transform.position;
         StartCoroutine(FOVRoutine());
 
-
+        HealthSystem.OnPlayerHurt += Teleport;
         PauseMenu.OnPause += OnGamePaused;
         PauseMenu.OnMainMenu += OnMainMenu;
     }
@@ -74,6 +75,13 @@ public class MonsterIA : MonoBehaviour
     public void OnGamePaused(bool pause){
         this.enabled = !pause;
         agent.enabled = !pause;
+    }
+
+    void Teleport(){
+        transform.position = PointsList[Random.Range(0, PointsList.Count)].transform.position;
+        CurrentPosition = PointsList[Random.Range(0, PointsList.Count)].transform.position;
+        Sceamer.Play();
+        currentState = States.Patrol;
     }
 
     private void PatrolState(){
@@ -120,7 +128,7 @@ public class MonsterIA : MonoBehaviour
 
         // Cuando la variable sus llega a 0 o no vee al jugador vuele a patrullar al punto mas cercano
         if (sus <= 0 & !canSeePlayer){
-            transform.position = PointsList[Random.Range(0,PointsList.Count)].transform.position;
+            transform.position = PointsList[Random.Range(0, PointsList.Count)].transform.position;
             CurrentPosition = PointsList[Random.Range(0, PointsList.Count)].transform.position;
             agent.speed = patrolSpeed;
             currentState = States.Patrol;

@@ -18,7 +18,7 @@ public class GenerationManager : MonoBehaviour{
 
     private void Start(){
         Invoke("BakeMesh", 2f);
-        Invoke("GenerateEnemy", 2.5f);
+        Invoke("GenerateEnemy", 5f);
     }
 
     void BakeMesh(){
@@ -26,7 +26,7 @@ public class GenerationManager : MonoBehaviour{
     }
 
     void GenerateEnemy(){
-        Instantiate(Enemy,new Vector3(50,0,50), Quaternion.identity);
+        Instantiate(Enemy,new Vector3(5,0,5), Quaternion.identity);
 
     }
 

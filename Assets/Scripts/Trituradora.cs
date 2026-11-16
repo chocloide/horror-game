@@ -51,7 +51,8 @@ public class Trituradora : MonoBehaviour
     void UpdateProgress(InteractableObject obj){
         if (obj != interactableComponent || Inventory.instance.inventory.Count == 0) return;
 
-        audioManager.PlayAudio(0); List<string> keysToRemove = new List<string>();
+        audioManager.PlayAudio(0); 
+        List<string> keysToRemove = new List<string>();
         
         foreach (KeyValuePair<string, Item> item in Inventory.instance.inventory){
             

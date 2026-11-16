@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour{
 
     public int walkSpeed = 1;
     public int runSpeed = 3;
+    public float upgradeSpeed = 0;
 
     public float maxEnergy = 10;
     public float energy = 10;
@@ -55,7 +56,7 @@ public class PlayerController : MonoBehaviour{
                 audioSource.pitch = 1.4f;
                 energy = Mathf.Max(energy - Time.deltaTime, 0);
                 Camera.ChangeFrequency(20f);
-                Rigid.AddForce(new Vector3(Direction.x * runSpeed, 0, Direction.z * runSpeed), ForceMode.VelocityChange);
+                Rigid.AddForce(new Vector3(Direction.x * runSpeed + upgradeSpeed, 0, Direction.z * runSpeed), ForceMode.VelocityChange);
             }
 
             else{

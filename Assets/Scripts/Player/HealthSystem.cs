@@ -8,17 +8,22 @@ public class HealthSystem : MonoBehaviour{
     public float health;
 
     public static event Action OnPlayerDead;
+    public static event Action OnPlayerHurt;
     [SerializeField] Rigidbody rb;
 
     private void Awake(){
+        OnPlayerHurt = null;
+        OnPlayerDead = null;
+
         health = maxHealth;
     }
 
     private void OnCollisionEnter(Collision collision){
-        rb.AddForce(Vector3.back * 500, ForceMode.Force);
 
         if (collision.collider.gameObject.tag == "Enemigo"){
-            health -= 5;
+            rb.AddForce(Vector3.back * 500, ForceMode.Force);
+            OnPlayerHurt.Invoke();
+            health -= 1;
 
             if (health <= 0){
                 OnPlayerDead.Invoke();

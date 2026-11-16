@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sobrevive
   m_EditorClassIdentifier: 
   type: 0
-  TaskName: Manten La energia lo mas que puedas,
+  TaskName: '*  Manten La energia lo mas que puedas,'
   place: {fileID: 0}
   obj: pelota
   TextMeshObj: {fileID: 0}
