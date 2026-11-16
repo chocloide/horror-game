@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+//CreateAssetMenu permite agregar una opción directa en el menú del proyecto de unity
 [CreateAssetMenu(fileName = "Task", menuName = "Inventario/Task", order = 1)]
 public class Task : ScriptableObject{
     public enum TaskType { Object, Place, Button }
@@ -20,8 +21,8 @@ public class Task : ScriptableObject{
 
     public bool isCompleted = false;
 
-    public void UpdateText()
-    {
+
+    public void UpdateText(){
         TextComponent.text = TaskName + " : " + amount.ToString() + "/" + maxAmount.ToString();
     }
 

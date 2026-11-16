@@ -30,8 +30,6 @@ public class InteractableObject : MonoBehaviour{
     [Header("Settings")]
     [SerializeField] bool autoStart;
 
-    [SerializeField] float enablePickUpDelay = 3.0f;
-
     [Header("State")]
     public Item item;
     public bool pickedUp = false;
@@ -74,14 +72,8 @@ public class InteractableObject : MonoBehaviour{
         this.item = item;
         var droppedItem = Instantiate(item.prefab, transform);
         droppedItem.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
-        StartCoroutine(enablePickUp(enablePickUpDelay));
     }
 
-    IEnumerator enablePickUp(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        GetComponent<Collider>().enabled = true;
-    }
 
 
 }

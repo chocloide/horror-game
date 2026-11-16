@@ -55,10 +55,9 @@ public class RoomSpawPoint : MonoBehaviour{
         if (other.CompareTag("RoomSpawnPoint")){
             var point = other.GetComponent<RoomSpawPoint>();
 
-
+            //si spawner collision con otro spawner, cierra la habitacion
             if (point && point.spawned == false && spawned == false){
                 Instantiate(CloseRoom, transform.position, Quaternion.identity, GameObject.Find("ROOMPARENT").transform);
-                //Destroy(gameObject);
             }
             spawned = true;
         }

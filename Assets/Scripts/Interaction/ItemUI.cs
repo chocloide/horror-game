@@ -15,8 +15,6 @@ public class ItemUI : MonoBehaviour{
         image.sprite = item.icon;
         textMesh.text = item.name;
         transform.localScale = Vector3.one;
-        //button.onClick.AddListener(() => removeItemAction.Invoke(InventoryId));
-
     }
 
     private void OnDestroy(){

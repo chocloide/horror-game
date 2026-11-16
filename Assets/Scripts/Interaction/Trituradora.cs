@@ -4,9 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-
-public class Trituradora : MonoBehaviour
-{
+public class Trituradora : MonoBehaviour{
 
     float progress = 1;
     public float MaxProgress = 1;
@@ -46,7 +44,6 @@ public class Trituradora : MonoBehaviour
     public void OnGamePaused(bool pause){
         this.enabled = !pause;
     }
-
 
     void UpdateProgress(InteractableObject obj){
         if (obj != interactableComponent || Inventory.instance.inventory.Count == 0) return;

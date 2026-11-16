@@ -23,6 +23,7 @@ public class Inventory : MonoBehaviour{
         InteractableObject.OnInteract += OnInteract;
     }
 
+
     public void OnInteract(InteractableObject other){
         if (other.CompareTag("DroppedItem")){
             if (other.pickedUp){
@@ -45,9 +46,5 @@ public class Inventory : MonoBehaviour{
         inventory.Remove(inventoryId);
         ui.RemoveUIItem(inventoryId);
     }
-
-
-
-
 }
 

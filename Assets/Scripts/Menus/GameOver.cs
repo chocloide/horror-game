@@ -18,14 +18,12 @@ public class GameOver : MonoBehaviour{
         bestTime.text += string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, mil_seconds);
     }
 
-    public void OnRetryPress()
-    {
+    public void OnRetryPress(){
         SceneManager.LoadScene("GameScene");
     }
 
 
-    public void OnMainMenuPress()
-    {
+    public void OnMainMenuPress(){
         SceneManager.LoadScene("MainMenu");
     }
 

@@ -28,7 +28,6 @@ public class PlayerController : MonoBehaviour{
         input = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
 
-
     public void OnMainMenu(){
         PauseMenu.OnPause -= OnGamePaused;
     }
@@ -52,7 +51,6 @@ public class PlayerController : MonoBehaviour{
             if (audioSource.isPlaying == false) audioSource.PlayOneShot(FootStep);
 
             if (Input.GetButton("Run") && can_run){
-                //Monster.AddSus(0.2f);
                 audioSource.pitch = 1.4f;
                 energy = Mathf.Max(energy - Time.deltaTime, 0);
                 Camera.ChangeFrequency(20f);
@@ -61,7 +59,6 @@ public class PlayerController : MonoBehaviour{
 
             else{
                 audioSource.pitch = 1f;
-                //Monster.AddSus(0.1f);
                 energy = Mathf.Min(energy + 5 * Time.deltaTime, maxEnergy);
                 Camera.ChangeFrequency(10f);
                 Rigid.AddForce(new Vector3(Direction.x * walkSpeed, 0, Direction.z * walkSpeed), ForceMode.VelocityChange);

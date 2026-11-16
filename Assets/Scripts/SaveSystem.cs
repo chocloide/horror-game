@@ -6,8 +6,8 @@ public class SaveSystem : MonoBehaviour{
 
     private void Awake(){
         instance = this;
-        
     }
+
     public void CreateSave(){
         SaveDataModel model = new SaveDataModel();
 

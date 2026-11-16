@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour{
 
     [SerializeField] Canvas MainMenuCanvas;
+    [SerializeField] Canvas TutorialCanvas;
     [SerializeField] TextMeshProUGUI bestTime;
 
     private void Start(){
@@ -26,6 +27,10 @@ public class MainMenu : MonoBehaviour{
 
     public void OnExitPress(){
         Application.Quit();
+    }
+
+    public void OnTutorialPress(){
+        TutorialCanvas.enabled = !TutorialCanvas.enabled;
     }
 
 }
