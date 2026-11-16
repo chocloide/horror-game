@@ -17,7 +17,8 @@ public class SaveSystem : MonoBehaviour{
 
     public void SaveBestTime(float time){
         SaveDataModel model = new SaveDataModel();
-        model.BestTime = time;
+
+        if (time > model.BestTime) model.BestTime = time;
 
         string json = JsonUtility.ToJson(model);
         File.WriteAllText(Application.persistentDataPath + "/save.json", json);

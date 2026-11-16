@@ -26,7 +26,7 @@ public class GenerationManager : MonoBehaviour{
     }
 
     void GenerateEnemy(){
-        Instantiate(Enemy);
+        Instantiate(Enemy,new Vector3(50,0,50), Quaternion.identity);
 
     }
 

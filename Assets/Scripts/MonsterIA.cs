@@ -120,8 +120,8 @@ public class MonsterIA : MonoBehaviour
 
         // Cuando la variable sus llega a 0 o no vee al jugador vuele a patrullar al punto mas cercano
         if (sus <= 0 & !canSeePlayer){
-            transform.position = GetClosePoint(transform.position).position;
-            CurrentPosition = GetClosePoint(transform.position).position;
+            transform.position = PointsList[Random.Range(0,PointsList.Count)].transform.position;
+            CurrentPosition = PointsList[Random.Range(0, PointsList.Count)].transform.position;
             agent.speed = patrolSpeed;
             currentState = States.Patrol;
         }

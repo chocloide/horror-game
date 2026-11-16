@@ -10,9 +10,9 @@ public class AudioManager : MonoBehaviour{
     }
 
     public void PlayAudio(int audioIndex){
-        audioSource.PlayOneShot(clips[audioIndex]);
-        audioSource.pitch = Random.Range(0.8f, 1.2f);
-
+        if (audioSource){
+            audioSource.PlayOneShot(clips[audioIndex]);
+            audioSource.pitch = Random.Range(0.8f, 1.2f);
+        }
     }
-
 }

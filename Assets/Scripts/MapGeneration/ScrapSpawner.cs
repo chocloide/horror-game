@@ -24,7 +24,7 @@ public class ScrapSpawner : MonoBehaviour{
     }
 
     void Spawn(){
-        respawnTime = Random.Range(15, 35);
+        respawnTime = Random.Range(20, 35);
         time = 0;
         ScrapParent = GameObject.Find("SCRAPPARENT");
         generationManager = GameObject.FindGameObjectWithTag("Rooms").GetComponent<GenerationManager>();

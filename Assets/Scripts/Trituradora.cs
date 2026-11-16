@@ -31,7 +31,7 @@ public class Trituradora : MonoBehaviour
 
     void Update(){
         ProgressBar.fillAmount = progress / MaxProgress;
-        progress = Mathf.Max(progress - (0.02f * Time.deltaTime), 0);
+        progress = Mathf.Max(progress - (0.022f * Time.deltaTime), 0);
 
         if (progress <= 0){
             OnEnergyOut.Invoke();
