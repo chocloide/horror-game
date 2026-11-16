@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 4413868370381411364}
   m_Layer: 0
   m_Name: Monster
-  m_TagString: Untagged
+  m_TagString: Enemigo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -264,12 +264,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2813a1e9962b3498a9601fad782b6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
-  PatrolPoints: {fileID: 0}
   sus: 0
   patrolSpeed: 3.8
   chaseSpeed: 5.5
-  radius: 0
+  radius: 200
   angle: 150
   targetMask:
     serializedVersion: 2

@@ -122,7 +122,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.011512459
+  m_Radius: 0.014
   m_Height: 0.0055503007
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -143,6 +143,7 @@ MonoBehaviour:
   description: 
   audioManager: {fileID: 0}
   canOutline: 1
+  PlayAudio: 1
   audioId: 1
   type: 0
   autoStart: 0

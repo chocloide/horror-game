@@ -48,6 +48,7 @@ public class CameraController : MonoBehaviour
         PauseMenu.OnPause -= OnGamePaused;
     }
     public void OnGamePaused(bool pause){
+        Head.transform.localRotation = Quaternion.Euler(smoothRotation.x, 0, 0);
         this.enabled = !pause;
     }
 

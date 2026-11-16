@@ -1,0 +1,64 @@
+using TMPro;
+using UnityEngine;
+
+public class Cronometro : MonoBehaviour{
+    public TextMeshProUGUI Text;
+    float time = 0;
+    float mil_seconds = 0f;
+    float seconds = 0f;
+    float minutes = 0f;
+
+    public bool active = false;
+
+    void Start(){
+        HealthSystem.OnPlayerDead += stop_count;
+        Trituradora.OnEnergyOut += stop_count;
+        PauseMenu.OnPause += OnGamePaused;
+        PauseMenu.OnMainMenu += OnMainMenu;
+    }
+
+    public void OnMainMenu()
+    {
+        PauseMenu.OnPause -= OnGamePaused;
+    }
+
+    public void OnGamePaused(bool pause)
+    {
+        this.enabled = !pause;
+    }
+
+
+    void Update(){
+        if (active){
+            cronometro();
+        }
+    }
+
+    public void start_count(){
+        active = true;
+    }
+
+    public void stop_count(){
+        active = false;
+        SaveSystem.instance.SaveBestTime(time);
+    }
+
+    public void restart(){
+        time = 0;
+        minutes = 0;
+        seconds = 0;
+        mil_seconds = 0;
+        active = false;
+    }
+
+    void cronometro(){
+        time += Time.deltaTime;
+        //Mathf.FloorToInt Redondea el valor hacia abajo y elimina los decimales 
+        minutes = Mathf.FloorToInt(time / 60);
+        seconds = Mathf.FloorToInt(time % 60);
+        mil_seconds = Mathf.FloorToInt((time % 1) * 100);
+
+        Text.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, mil_seconds);
+    }
+
+}

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f1767c1354b08c4582119deda35bcc2, type: 3}
-  m_Name: TaskTest
+  m_Name: Sobrevive
   m_EditorClassIdentifier: 
   type: 0
-  TaskName: Interactuar con pelota
+  TaskName: Manten La energia lo mas que puedas,
   place: {fileID: 0}
   obj: pelota
   TextMeshObj: {fileID: 0}
   TextComponent: {fileID: 0}
-  amount: 2
-  maxAmount: 2
-  isCompleted: 1
+  amount: 0
+  maxAmount: 1
+  isCompleted: 0

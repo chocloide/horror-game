@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomSpawPoint : MonoBehaviour{
@@ -18,7 +16,8 @@ public class RoomSpawPoint : MonoBehaviour{
         templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<GenerationManager>();
         RoomParent = GameObject.Find("ROOMPARENT");
 
-        Invoke("SpawnRooms", 0.5f);
+
+        Invoke("SpawnRooms", 0.1f);
     }
 
     void SpawnRooms(){
@@ -58,9 +57,8 @@ public class RoomSpawPoint : MonoBehaviour{
 
 
             if (point && point.spawned == false && spawned == false){
-                Instantiate(CloseRoom, transform.position, Quaternion.identity);
+                Instantiate(CloseRoom, transform.position, Quaternion.identity, GameObject.Find("ROOMPARENT").transform);
                 //Destroy(gameObject);
-                Debug.Log("amor");
             }
             spawned = true;
         }

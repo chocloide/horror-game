@@ -1,10 +1,9 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
-using static UnityEngine.EventSystems.EventTrigger;
-using static UnityEngine.ParticleSystem;
+
 
 public class Trituradora : MonoBehaviour
 {
@@ -19,8 +18,7 @@ public class Trituradora : MonoBehaviour
     private Animation Anim;
     [SerializeField] ParticleSystem particle;
 
-    List<Item> listOfScrap;
-
+    public static event Action OnEnergyOut;
     void Start(){
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         Anim = GetComponent<Animation>();
@@ -33,7 +31,12 @@ public class Trituradora : MonoBehaviour
 
     void Update(){
         ProgressBar.fillAmount = progress / MaxProgress;
-        progress = Mathf.Max(progress - (0.025f * Time.deltaTime), 0);
+        progress = Mathf.Max(progress - (0.02f * Time.deltaTime), 0);
+
+        if (progress <= 0){
+            OnEnergyOut.Invoke();
+            SceneManager.LoadScene("GameOver");
+        }
 
     }
 
@@ -54,13 +57,12 @@ public class Trituradora : MonoBehaviour
             
             keysToRemove.Add(item.Key);
             particle.Play();
-            //listOfScrap.Add(item.Value);
             Anim.Play("TrituradoraCrush");
         }
 
         foreach (var key in keysToRemove){
             Inventory.instance.DropItem(key);
-            progress += 0.1f;
+            progress =  Mathf.Min(progress + 0.1f, MaxProgress);
         }
 
     }

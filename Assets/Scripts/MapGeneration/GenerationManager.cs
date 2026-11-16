@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
 
@@ -19,8 +17,8 @@ public class GenerationManager : MonoBehaviour{
     public GameObject Enemy;
 
     private void Start(){
-        Invoke("BakeMesh", 1f);
-        Invoke("GenerateEnemy", 1.2f);
+        Invoke("BakeMesh", 2f);
+        Invoke("GenerateEnemy", 2.5f);
     }
 
     void BakeMesh(){

@@ -3,12 +3,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour{
+    public static PauseMenu instance { get; private set; }
     public bool paused = false;
 
     [SerializeField] Canvas PauseCanvas;
 
     public static event Action<bool> OnPause;
     public static event Action OnMainMenu;
+
+    private void Awake()
+    {
+        OnPause = null;
+        OnMainMenu = null;
+    }
 
     void Update(){
         if (Input.GetKeyDown(KeyCode.Escape)){

@@ -22,8 +22,8 @@ public class MonsterIA : MonoBehaviour
 
     public float sus = 0f;
 
-    float timeSearching = 10f;
-    float time = 10f;
+    float timeSearching = 5f;
+    float time = 5f;
 
     public float patrolSpeed = 3.8f;
     public float chaseSpeed = 5.5f;
@@ -80,26 +80,28 @@ public class MonsterIA : MonoBehaviour
         distanceLeft = Vector3.Distance(CurrentPosition, transform.position);
         
         agent.SetDestination(CurrentPosition);
-        sus = Mathf.Max(sus - 3 * Time.deltaTime, 0);
+        sus = Mathf.Min(sus + 1 * Time.deltaTime, 50);
 
-
+        // cuando el enemigo esta suficiente cerca del punto va al siguiente
         if (distanceLeft < 2){
             index = (index + 1) % PointsList.Count;
             CurrentPosition = PointsList[index].transform.position;
         }
 
-        else if ((sus >= 25 & distancePlayer < 25) ){
-            SusPosition = Player.transform.position;
+        // cuando la variable sus llega a 25 o vee al jugador, va hacia el punto mas cerla a la posicion del jugador
+        else if (sus >= 25 || canSeePlayer ){
+            SusPosition = GetClosePoint(Player.transform.position).position; 
             currentState = States.Sus;
             time = timeSearching;
         }
-
     }
 
     private void SusState(){
+        sus = Mathf.Min(sus + 1 * Time.deltaTime, 50);
         agent.SetDestination(SusPosition);
         time -= Time.deltaTime;
 
+        // cuando la variable sus es mayor o igual 45 o vee al jugador, Empieza a persguir al jugador
         if (sus >= 45 || canSeePlayer){
             currentState = States.Chase;
             agent.speed = chaseSpeed;
@@ -116,8 +118,10 @@ public class MonsterIA : MonoBehaviour
         agent.SetDestination(Player.transform.position);
         sus = Mathf.Max(sus - 5 * Time.deltaTime, 0);
 
+        // Cuando la variable sus llega a 0 o no vee al jugador vuele a patrullar al punto mas cercano
         if (sus <= 0 & !canSeePlayer){
-            CurrentPosition = GetClosePoint().position;
+            transform.position = GetClosePoint(transform.position).position;
+            CurrentPosition = GetClosePoint(transform.position).position;
             agent.speed = patrolSpeed;
             currentState = States.Patrol;
         }
@@ -131,19 +135,17 @@ public class MonsterIA : MonoBehaviour
         }
     }
 
-    private Transform GetClosePoint(){
+    private Transform GetClosePoint(Vector3 pos){
         int i = 0;
-        foreach (GameObject point in PointsList)
-        {
+        foreach (GameObject point in PointsList){
             i++;
-            float DistanceTo = Vector3.Distance(transform.position, point.transform.position);
+            float DistanceTo = Vector3.Distance(pos, point.transform.position);
 
             if (DistanceTo < 20 & DistanceTo > 0){
                 index = i;
                 return point.transform; 
 
             }
-
         }
         return PointsList[0].transform; ;
     }
@@ -155,40 +157,33 @@ public class MonsterIA : MonoBehaviour
         
     }
 
-    private IEnumerator FOVRoutine()
-    {
+    private IEnumerator FOVRoutine(){
         WaitForSeconds wait = new WaitForSeconds(0.2f);
 
-        while (true)
-        {
+        while (true){
             yield return wait;
             FieldOfViewCheck();
         }
     }
-    private void FieldOfViewCheck()
-    {
+    private void FieldOfViewCheck(){
         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
 
-        if (rangeChecks.Length != 0)
-        {
+        if (rangeChecks.Length != 0){
             Transform target = rangeChecks[0].transform;
             Vector3 directionToTarget = (target.position - transform.position).normalized;
 
             //si el jugador esta en el angulo de vision
-            if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
-            {
+            if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2){
                 float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
                 if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
                     canSeePlayer = true;
-                else
-                    canSeePlayer = false;
+
+                else canSeePlayer = false;
             }
-            else
-                canSeePlayer = false;
+            else canSeePlayer = false;
         }
-        else if (canSeePlayer)
-            canSeePlayer = false;
+        else if (canSeePlayer) canSeePlayer = false;
     }
 }
 

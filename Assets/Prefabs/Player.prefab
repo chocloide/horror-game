@@ -160,9 +160,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8435408090879664105}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -294, y: 462.59998}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 106, y: -37.400024}
   m_SizeDelta: {x: 145, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7601653878030246311
@@ -311,7 +311,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 1452881.9}
+  m_AnchoredPosition: {x: 0, y: 1576025}
   m_SizeDelta: {x: 0, y: 400}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6094841667250568678
@@ -697,13 +697,14 @@ GameObject:
   - component: {fileID: 6676911309640161759}
   - component: {fileID: 57440949397180807}
   - component: {fileID: 3271385129720893987}
+  - component: {fileID: 611067557348261112}
   - component: {fileID: -2908619176983095813}
   - component: {fileID: 978750474174334406}
   - component: {fileID: 3656241446674594791}
-  - component: {fileID: 611067557348261112}
-  m_Layer: 0
+  - component: {fileID: 4120584247340071202}
+  m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -802,6 +803,33 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &611067557348261112
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2168800069453970587}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 15
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!114 &-2908619176983095813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -815,14 +843,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 1
-  runSpeed: 3
-  maxEnergy: 10
-  energy: 10
-  maxHealth: 10
-  health: 10
+  runSpeed: 6
+  maxEnergy: 20
+  energy: 20
   Rigid: {fileID: 0}
   Camera: {fileID: 8806803807798846818}
-  Monster: {fileID: 0}
   FootStep: {fileID: 0}
   audioSource: {fileID: 0}
 --- !u!114 &978750474174334406
@@ -855,33 +880,21 @@ MonoBehaviour:
   audioManager: {fileID: 0}
   droppedItemPrefab: {fileID: 7198158863913159217, guid: 4656e03ddd85fc7419aff673c855856b,
     type: 3}
---- !u!54 &611067557348261112
-Rigidbody:
+--- !u!114 &4120584247340071202
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2168800069453970587}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 15
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 80
-  m_CollisionDetection: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28a2d1c717ef37e4fae6427985be7ed3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 75
+  health: 75
+  rb: {fileID: 611067557348261112}
 --- !u!1 &2682866599300829421
 GameObject:
   m_ObjectHideFlags: 0
@@ -1601,9 +1614,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8435408090879664105}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -294, y: 415}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 106, y: -85}
   m_SizeDelta: {x: 145, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2975476642975297798
@@ -2457,6 +2470,7 @@ MonoBehaviour:
   HealthBar: {fileID: 7274393286699627657}
   SusBar: {fileID: 3272417447384642182}
   player: {fileID: -2908619176983095813}
+  healthSystem: {fileID: 4120584247340071202}
   Monster: {fileID: 0}
 --- !u!223 &6637935043136969597
 Canvas:

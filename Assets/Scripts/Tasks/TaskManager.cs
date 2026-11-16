@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public class TaskManager : MonoBehaviour{
  public static TaskManager instance {  get; private set; }
@@ -10,8 +8,7 @@ public class TaskManager : MonoBehaviour{
     
     [SerializeField] GameObject TaskList;
 
-    [SerializeField] List<Task> Inspectorlist = new List<Task>();
-    List<Task> list = new List<Task>();
+    [SerializeField] List<Task> list = new List<Task>();
 
     private void Awake(){
         instance = this;

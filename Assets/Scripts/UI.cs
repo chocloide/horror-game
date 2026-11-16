@@ -7,12 +7,13 @@ public class EnergyBar : MonoBehaviour
     [SerializeField] Image HealthBar;
     [SerializeField] Image SusBar;
     [SerializeField] PlayerController player;
+    [SerializeField] HealthSystem healthSystem;
     [SerializeField] MonsterIA Monster;
 
 
     void Update(){
         Energybar.fillAmount = player.energy / player.maxEnergy;
-        HealthBar.fillAmount = player.health / player.maxHealth;
+        HealthBar.fillAmount = healthSystem.health / healthSystem.maxHealth;
 
         if (player.energy == 0){
             Energybar.color = new Color32(159, 159, 159, 125);
